@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+               <report
+                       id="hms_patient_report"
+                       model="hms.patient"
+                       report_type="qweb-pdf"
+                       string="Patient Status Report"
+                       name="hms.hms_patient_template"
+               />
+
+    </data>
+</odoo>

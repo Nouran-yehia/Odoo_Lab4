@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="hms_patient_tree_view" model="ir.ui.view">
+            <field name="name">hms.patient.tree.view</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id" />
+                    <field name="Firstname" />
+                    <field name="Lastname" />
+                </tree>
+            </field>
+        </record>
+<record id="hms_patient_form_view" model="ir.ui.view">
+                    <field name="name">Hms.patient.form.view</field>
+                    <field name="model">hms.patient</field>
+                    <field name="arch" type="xml">
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="Firstname" required="True"/>
+                                    <field name="Lastname" required="True" />
+                                    <field name="Birthdate" />
+                                    <field name="email" />
+                                    <field name="History" attrs="{
+                                    'invisible':[('Age','&lt;', 50 )]
+                                    }" />
+                                    <field name="PCR" />
+                                    <field name="CRRatio" attrs="{
+                                    'required':[('PCR','=', True )]
+                                    }" />
+                                    <field name="Blood" />
+                                    <field name="Image" />
+                                    <field name="Address" />
+                                    <field name="Age" />
+                                    <field name="department_id" domain="[('Is_opened','=',True)]" />
+                                    <field name="states" />
+                                    <field name="doctor_id" attrs="{
+                                    'readonly':[('department_id','=', False)]
+                                    }"/>
+                                </group>
+                                <notebook>
+                                    <page string = "departments">
+                                        <field name = "department_id"/>
+                                    </page>
+                                </notebook>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+        <record id="hms_patient_action" model="ir.actions.act_window">
+            <field name="name"> Patients </field>
+            <field name="res_model">hms.patient</field>
+        </record>
+
+        <menuitem id="hms_root_menu" name="HMS" />
+        <menuitem id="hms_data_menu" name="Data" parent="hms_root_menu" />
+        <menuitem id="hms_patients_menu" name="Patients" parent="hms_data_menu" action="hms_patient_action" />
+    </data>
+</odoo>
